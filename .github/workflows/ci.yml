@@ -23,10 +23,11 @@ jobs:
 
 
       - name: Deploy webhook
-        env:
-           DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
+        #env:
+        #   DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
         run: |
-            curl --silent --data "secret=${{$DEPLOY_SECRET}}" --data "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --data "GITHUB_SHA=$GITHUB_SHA" http://104.236.40.108/action
+            echo ${{secrets.DEPLOY_SECRET}}
+            curl --silent --data "secret=${{secrets.DEPLOY_SECRET}}" --data "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --data "GITHUB_SHA=$GITHUB_SHA" http://104.236.40.108/action
 
 #      - name: Deploy SSH
 #        env:
