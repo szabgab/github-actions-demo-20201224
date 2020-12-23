@@ -24,17 +24,17 @@ jobs:
 
 
       - name: Deploy webhook
-        env:
-          DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
-          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+        #env:
+        #  DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
         run: |
-            echo $DEPLOY_SECRET
+            #echo $DEPLOY_SECRET
             echo ${{secrets.DEPLOY_SECRET}}
             curl --silent --data "secret=${{secrets.DEPLOY_SECRET}}" --data "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --data "GITHUB_SHA=$GITHUB_SHA" http://104.236.40.108/action
 
       - name: Deploy SSH
         env:
-           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
         run: |
           mkdir ~/.ssh/
           echo $PRIVATE_KEY > ~/.ssh/id_rsa
