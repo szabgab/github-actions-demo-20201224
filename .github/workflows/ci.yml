@@ -23,24 +23,21 @@ jobs:
 
 
       - name: Deploy webhook
-        #env:
-        #   DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
+        env:
+           DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
         run: |
+            echo $DEPLOY_SECRET
             echo ${{secrets.DEPLOY_SECRET}}
             curl --silent --data "secret=${{secrets.DEPLOY_SECRET}}" --data "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --data "GITHUB_SHA=$GITHUB_SHA" http://104.236.40.108/action
 
-#      - name: Deploy SSH
-#        env:
-#           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-#        run: |
-#          mkdir ~/.ssh/
-#          echo $PRIVATE_KEY > ~/.ssh/id_rsa
-#          sudo chmod 600 ~/.ssh/id_rsa
-#          #ssh-keyscan -H ${{secrets.DEPLOY_SERVER}} > ~/.ssh/known_hosts
-#
-#          #echo $MYNAME
-#          #echo $MYNAME > code.txt
-#          #ls -l
-#          #cat code.txt
-#          ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@104.236.40.108 hostname
+      - name: Deploy SSH
+        env:
+           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        run: |
+          mkdir ~/.ssh/
+          echo $PRIVATE_KEY > ~/.ssh/id_rsa
+          sudo chmod 600 ~/.ssh/id_rsa
+          #ssh-keyscan -H ${{secrets.DEPLOY_SERVER}} > ~/.ssh/known_hosts
+
+          ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@104.236.40.108 hostname
 
