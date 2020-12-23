@@ -26,7 +26,7 @@ jobs:
         env:
            DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
         run: |
-            curl --silent --data "secret=${{secrets.DEPLOY_SECRET}}"  http://104.236.40.108/action
+            curl --silent --data "secret=${{secrets.DEPLOY_SECRET}}" "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" "GITHUB_SHA=$GITHUB_SHA" http://104.236.40.108/action
 
 #      - name: Deploy SSH
 #        env:
