@@ -20,11 +20,11 @@ jobs:
             hostname
 
 
-#      - name: Deploy webhook
-#        env:
-#           DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
-#        run: |
-#            curl --data "secret=${{secrets.DEPLOY_SECRET}}"  http://104.236.40.108/action/
+      - name: Deploy webhook
+        env:
+           DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
+        run: |
+            curl --data "secret=${{secrets.DEPLOY_SECRET}}"  http://104.236.40.108/action/
 
 #      - name: Deploy SSH
 #        env:
