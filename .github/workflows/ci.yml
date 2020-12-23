@@ -19,6 +19,7 @@ jobs:
       - name: Print
         run: |
             hostname
+            printenv | sort
 
 
       - name: Deploy webhook
