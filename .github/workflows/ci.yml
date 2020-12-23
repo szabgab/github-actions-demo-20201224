@@ -11,6 +11,7 @@ on:
 
 jobs:
   build:
+    environment: DEPLOYMENT
     runs-on: ubuntu-latest
     name: Build on Linux
     steps:
@@ -28,8 +29,7 @@ jobs:
         run: |
             echo $DEPLOY_SECRET
             echo ${{secrets.DEPLOY_SECRET}}
-            #curl --silent --data "secret=${{secrets.DEPLOY_SECRET}}" --data "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --data "GITHUB_SHA=$GITHUB_SHA" http://104.236.40.108/action
-            curl --silent --data "secret=titok" --data "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --data "GITHUB_SHA=$GITHUB_SHA" http://104.236.40.108/action
+            curl --silent --data "secret=${{secrets.DEPLOY_SECRET}}" --data "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --data "GITHUB_SHA=$GITHUB_SHA" http://104.236.40.108/action
 
       - name: Deploy SSH
         env:
