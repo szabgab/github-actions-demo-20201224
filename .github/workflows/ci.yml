@@ -25,7 +25,8 @@ jobs:
 
       - name: Deploy webhook
         env:
-           DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
+          DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
         run: |
             echo $DEPLOY_SECRET
             echo ${{secrets.DEPLOY_SECRET}}
@@ -37,11 +38,9 @@ jobs:
         run: |
           mkdir ~/.ssh/
           echo $PRIVATE_KEY > ~/.ssh/id_rsa
+          echo ${{secrets.KNOWN_HOSTS}} > ~/.ssh/known_hosts
           ls -l ~/.ssh/
           sudo chmod 600 ~/.ssh/id_rsa
-          head ~/.ssh/id_rsa
-          tail ~/.ssh/id_rsa
-          #ssh-keyscan -H ${{secrets.DEPLOY_SERVER}} > ~/.ssh/known_hosts
 
           ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@104.236.40.108 hostname
 
