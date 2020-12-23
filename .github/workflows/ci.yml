@@ -28,7 +28,8 @@ jobs:
         run: |
             echo $DEPLOY_SECRET
             echo ${{secrets.DEPLOY_SECRET}}
-            curl --silent --data "secret=${{secrets.DEPLOY_SECRET}}" --data "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --data "GITHUB_SHA=$GITHUB_SHA" http://104.236.40.108/action
+            #curl --silent --data "secret=${{secrets.DEPLOY_SECRET}}" --data "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --data "GITHUB_SHA=$GITHUB_SHA" http://104.236.40.108/action
+            curl --silent --data "secret=titok" --data "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --data "GITHUB_SHA=$GITHUB_SHA" http://104.236.40.108/action
 
       - name: Deploy SSH
         env:
@@ -36,6 +37,7 @@ jobs:
         run: |
           mkdir ~/.ssh/
           echo $PRIVATE_KEY > ~/.ssh/id_rsa
+          ls -l ~/.ssh/
           sudo chmod 600 ~/.ssh/id_rsa
           #ssh-keyscan -H ${{secrets.DEPLOY_SERVER}} > ~/.ssh/known_hosts
 
